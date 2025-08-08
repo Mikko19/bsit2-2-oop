@@ -1,69 +1,24 @@
-
-import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Student s1 = new Student("James Hawthorne", 20, "OOP", 85, 78, 92);
+        Student s2 = new Student("Michael Jackson", 19, "Platform Technology", 80, 72, 90);
+        Student s3 = new Student("Nishimura Riki", 18, "Ethics", 54, 58, 60);
 
-        // Collect student information
-        System.out.println("=== Welcome to Harvard University Portal ===");
-        System.out.print("Enter Student ID: ");
-        String studentID = scanner.nextLine();
+        Student[] students = {s1, s2, s3};
+        int passingCount = 0;
 
-        System.out.print("Enter First Name: ");
-        String firstName = scanner.nextLine();
+        for (Student s : students) {
+            s.displayInfo();
+            double avg = s.calculateAverage();
+            System.out.printf("Average: %.2f\n", avg);
+            String letter = s.getLetterGrade();
+            System.out.println("Letter Grade: " + letter);
+            boolean passing = s.isPassing();
+            System.out.println("Status: " + (passing ? "PASSING" : "FAILING"));
+            System.out.println();
+            if (passing) passingCount++;
+        }
 
-        System.out.print("Enter Last Name: ");
-        String lastName = scanner.nextLine();
-
-        System.out.print("Enter Course: ");
-        String course = scanner.nextLine();
-
-        System.out.print("Enter Section: ");
-        String section = scanner.nextLine();
-
-        // Display student information
-        System.out.println("\n--- STUDENT INFORMATION ---");
-        System.out.println("Student ID: " + studentID);
-        System.out.println("Student Name: " + firstName + " " + lastName);
-        System.out.println("Course: " + course);
-        System.out.println("Section: " + section);
-
-        // Get academic scores
-        System.out.println("\n--- INPUT ACADEMIC SCORES ---");
-        System.out.print("Midterm Exam Score (0-100): ");
-        int midterm = scanner.nextInt();
-
-        System.out.print("Final Exam Score (0-100): ");
-        int finalExam = scanner.nextInt();
-
-        System.out.print("Project Score (0-100): ");
-        int project = scanner.nextInt();
-
-        System.out.print("Attendance Percentage (0-100): ");
-        int attendance = scanner.nextInt();
-
-        // Calculate average score
-        int totalScore = midterm + finalExam + project + attendance;
-        double averageScore = (totalScore / 400.0) * 100;
-
-        // Display academic performance
-        System.out.println("\n--- STUDENT SCORES ---");
-        System.out.println("Midterm Exam Score: " + midterm);
-        System.out.println("Final Exam Score: " + finalExam);
-        System.out.println("Project Score: " + project);
-        System.out.println("Attendance Score: " + attendance);
-        System.out.printf("Average Score: %.2f\n", averageScore);
-
-        // Display result
-        String remarks = (averageScore < 75) ? "FAILED" : "PASSED";
-        System.out.println("Remarks: " + remarks);
-
-        System.out.println("\nThank you for using the Harvard Student Portal.");
-
-        scanner.close();
+        System.out.println("Summary: Total number of students who are passing: " + passingCount);
     }
 }
-
-
-
